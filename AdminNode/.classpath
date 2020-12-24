@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/home/minio/Transferências/wildfly-20.0.1.Final/bin/client/jboss-client.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/byte-buddy-1.9.11.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/classmate-1.3.4.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/commonj.sdo.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/dom4j-2.1.1.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/FastInfoset.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/FastInfoset-1.2.15.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/gmbal.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/ha-api.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/hibernate-commons-annotations-5.0.4.Final.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/hibernate-core-5.3.13.Final.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/istack-commons-runtime.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/istack-commons-runtime-3.0.7.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jakarta.activation-api.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jakarta.annotation-api.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jakarta.jws-api.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jakarta.mail-api.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jakarta.persistence-api.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jakarta.xml.bind-api.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jakarta.xml.soap-api.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jakarta.xml.ws-api.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jandex-2.0.5.Final.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/javassist-3.23.2-GA.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/javax.activation-api-1.2.0.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/javax.persistence-api-2.2.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jaxb-api-2.3.1.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jaxb-jxc.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jaxb-runtime.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jaxb-runtime-2.3.1.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jaxb-xjc.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jaxws-eclipselink-plugin.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jaxws-rt.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jaxws-tools.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jboss-logging-3.3.2.Final.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/jboss-transaction-api_1.2_spec-1.1.1.Final.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/management-api.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/mimepull.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/org.eclipse.persistence.asm.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/org.eclipse.persistence.core.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/org.eclipse.persistence.moxy.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/org.eclipse.persistence.sdo.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/pfl-asm.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/pfl-basic.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/pfl-basic-tools.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/pfl-dynamic.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/pfl-tf.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/pfl-tf-tools.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/policy.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/postgresql-42.2.18 (1).jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/resolver.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/saaj-impl.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/sdo-eclipselink-plugin.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/stax2-api.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/stax-ex.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/stax-ex-1.8.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/streambuffer.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/txw2.jar"/>
+	<classpathentry kind="lib" path="/Projeto2/lib/txw2-2.3.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
