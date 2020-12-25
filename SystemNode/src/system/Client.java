@@ -32,7 +32,8 @@ public class Client {
 	private String send(String text)
 	{
 		String str = "";
-		try (JMSContext context = connectionFactory.createContext("pedro", "pedro123.");)
+		// try (JMSContext context = connectionFactory.createContext("calmo", "Calmo@1997");)
+		try (JMSContext context = connectionFactory.createContext("calmo", "Calmo@1997");)
 		{
 			JMSProducer messageProducer = context.createProducer();
 			TextMessage msg = context.createTextMessage();
@@ -43,12 +44,14 @@ public class Client {
 			
 			JMSConsumer cons = context.createConsumer(tmp);
 			str = cons.receiveBody(String.class);
+			System.out.println("\n\n\n\n\n");
 			System.out.println("System: "+ str);
 		}
 		catch (Exception re)
 		{
 			re.printStackTrace();
 		}
+		
 		return str;
 
 
@@ -119,8 +122,8 @@ public class Client {
 			type = "";
 			System.out.println("Choose an action:\n 3-See All Publications \n "
 					+ "4-Search a publication title  \n 5-Add New Publication \n 6-Update Publication title \n "
-					+ "20- Update Publication date\n 21- Update Publication type\n7- Remove Publication \n"
-					+ " 0-Exit");
+					+ "7-Remove Publication \n 20-Update Publication date\n 21-Update Publication type\n "
+					+ "0-Exit");
 			option = in.nextInt();
 
 			switch(option) {
@@ -223,6 +226,10 @@ public class Client {
 				
 			
 			}
+
+			
+			
+			
 			
 			
 			

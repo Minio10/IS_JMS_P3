@@ -64,6 +64,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/pedro/wildfly-20.0.1.Final/bin/client/jboss-client.jar"/>
+	<classpathentry kind="lib" path="/home/minio/Transferências/wildfly-20.0.1.Final/bin/client/jboss-client.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

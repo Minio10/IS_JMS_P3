@@ -24,7 +24,6 @@ import javax.persistence.TypedQuery;
 
 import common.User;
 import common.Publication;
-import common.Researcher;
 public class SystemNode
 {
 	private ConnectionFactory connectionFactory;
@@ -36,7 +35,7 @@ public class SystemNode
 	}
 	
 	
-	
+	// FUnction to delete a publication
 	public String deletePub(String title) {
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPersistence");
@@ -68,6 +67,7 @@ public class SystemNode
 		
 	}
 	
+	// Add Publication
 	public String addPub(String title, String date,String type) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPersistence");
 		EntityManager em = emf.createEntityManager();
@@ -90,6 +90,8 @@ public class SystemNode
 		return "Publication added";
 
 	}
+	
+	// UpdatePublication Title
 	public String updateTitle(String title,String newtitle) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPersistence");
 		EntityManager em = emf.createEntityManager();
@@ -114,6 +116,8 @@ public class SystemNode
     	return "Publication did not exist";
     	
 	}
+	
+	// Update Publication Type
 	public String updateType(String title,String newType) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPersistence");
 		EntityManager em = emf.createEntityManager();
@@ -138,6 +142,7 @@ public class SystemNode
     	return "Publication did not exist";
 	}
 	
+	// Update Publication PubDate
 	public String updateDate(String title, String newdate) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPersistence");
 		EntityManager em = emf.createEntityManager();
@@ -161,6 +166,8 @@ public class SystemNode
     	}
     	return "Publication did not exist";
 	}
+	
+	// Function returns all info from a certain Publication title
 public String titlePubInfo(String title) {
 	
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPersistence");
@@ -265,7 +272,8 @@ public String titlePubInfo(String title) {
 	
 	private void receive() throws JMSException, FileNotFoundException, NamingException, IOException
 	{
-		try (JMSContext context = connectionFactory.createContext("pedro", "pedro123.");)
+		// try (JMSContext context = connectionFactory.createContext("calmo", "Calmo@1997");)
+		try (JMSContext context = connectionFactory.createContext("calmo", "Calmo@1997");)
 		{
 			
 			JMSConsumer consumer = context.createConsumer(destination);
