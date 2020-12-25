@@ -29,7 +29,7 @@ public class Admin {
 	{
 		String str = "";
 		// try (JMSContext context = connectionFactory.createContext("calmo", "Calmo@1997");)
-		try (JMSContext context = connectionFactory.createContext("calmo", "Calmo@1997");)
+		try (JMSContext context = connectionFactory.createContext("pedro", "pedro123.");)
 		{
 			JMSProducer messageProducer = context.createProducer();
 			TextMessage msg = context.createTextMessage();
@@ -54,18 +54,60 @@ public class Admin {
 	public static void main(String[] args) throws NamingException{
 		// TODO Auto-generated method stub
 		int option = 9999;
-		String temp;
+		String temp,username,aux;
 		Scanner in = new Scanner(System.in); 
 		Admin admin = new Admin();
 		
 		while(option != 0) {
-			System.out.println("Choose an action:\n8-List all Users \n "
-					+ "9-List all Pending Tasks  \n10-Deactivate User \n 11-List All Publications \n "
-					+ "12- Publication Information \n"
-					+ " 0-Exit");
-
+			username="";
+			aux="";
+			System.out.println("Choose an action:\n8-List all Users"
+					+ "\n9-List all Pending Tasks  \n10-Deactivate User \n11-List All Publications"
+					+ "\n12- Publication Information \n13-Activate User"
+					+ "\n0-Exit");
+			
 			option = in.nextInt();
-			temp = admin.send(Integer.toString(option));
+			switch(option) {
+				
+				case 8:
+				case 9:
+				case 11:
+					temp = admin.send(Integer.toString(option));
+					break;
+				
+					
+				case 10:
+					aux="10 ";
+					System.out.println("Insert the username of the user you wish to deactivate: ");
+					while(username.equals("")) {
+						username = in.nextLine(); 
+					}
+					aux+=username;
+					temp = admin.send(aux);
+					break;
+					
+				//Title is the same as username
+				case 12:
+					System.out.println("Choose a publication title to search:");
+					while(username.equals("")) {
+						username = in.nextLine(); 
+					}
+					aux = "12 ";
+					aux += username;
+					temp = admin.send(aux);
+					break;
+					
+					
+				case 13:
+					aux="13 ";
+					System.out.println("Insert the username of the user you wish to activate: ");
+					while(username.equals("")) {
+						username = in.nextLine(); 
+					}
+					aux+=username;
+					temp = admin.send(aux);
+					break;
+			}	
 				
 		}
 		

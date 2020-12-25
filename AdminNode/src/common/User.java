@@ -17,12 +17,14 @@ public class User {
 	private Long id;
 	private String username;
 	private String password;
+	private boolean active;
 	
 	public User() {}
 	
-	public User(String username, String password) {
+	public User(String username, String password, boolean active) {
 		this.setUsername(username);
 		this.setPassword(password);
+		this.setActive(active);
 	}
 
 	public String getPassword() {
@@ -39,6 +41,14 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

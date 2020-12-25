@@ -34,6 +34,110 @@ public class SystemNode
 		this.destination = InitialContext.doLookup("jms/topic/playTopic");
 	}
 	
+	public int verifyActiveUSer(String username) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPersistence");
+		EntityManager em = emf.createEntityManager();
+		
+		String jpql = "SELECT s FROM User s";
+    	TypedQuery<User> typedQuery = em.createQuery(jpql, User.class);
+    	List<User> mylist = typedQuery.getResultList();
+    	
+    	for(User u: mylist) {
+    		if(u.getUsername().equals(username) && u.isActive()) {
+    			em.close();
+    			emf.close();
+    			return 0;
+    		}
+    		if(u.getUsername().equals(username) && u.isActive()==false) {
+    			em.close();
+    			emf.close();
+    			return 1;
+    		}		
+    	}
+    	em.close();
+		emf.close();
+    	return 1;
+	}
+	
+	//Activate a user
+	public String activateUser(String username) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPersistence");
+		EntityManager em = emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		String jpql = "SELECT s FROM User s";
+    	TypedQuery<User> typedQuery = em.createQuery(jpql, User.class);
+    	List<User> mylist = typedQuery.getResultList();
+    	
+    	for(User u: mylist) {
+    		if(u.getUsername().equals(username) && u.isActive()) {
+    			em.close();
+    			emf.close();
+    			return "User already active";
+    		}
+    		if(u.getUsername().equals(username) && u.isActive()==false) {
+    			u.setActive(true);
+    			em.getTransaction().commit();
+    			em.close();
+    			emf.close();
+    			return "User activated";
+    		}		
+    	}
+    	em.close();
+		emf.close();
+    	return "User not found";
+	}
+	
+	//Deactivate a user
+	public String deactivateUser(String username) {
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPersistence");
+		EntityManager em = emf.createEntityManager();
+		
+		em.getTransaction().begin();
+		String jpql = "SELECT s FROM User s";
+    	TypedQuery<User> typedQuery = em.createQuery(jpql, User.class);
+    	List<User> mylist = typedQuery.getResultList();
+    	
+    	for(User u: mylist) {
+    		if(u.getUsername().equals(username) && u.isActive()) {
+    			u.setActive(false);
+    			em.getTransaction().commit();
+    			em.close();
+    			emf.close();
+    			return "User deactivated";
+    		}
+    		if(u.getUsername().equals(username) && u.isActive()==false) {
+    			em.close();
+    			emf.close();
+    			return "User already deactivated";
+    		}		
+    	}
+    	em.close();
+		emf.close();
+    	return "User not found";
+	}
+	
+	//List all active users
+	public String listUsers() {
+		String users="";
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestPersistence");
+		EntityManager em = emf.createEntityManager();
+		
+		String jpql = "SELECT s FROM User s";
+    	TypedQuery<User> typedQuery = em.createQuery(jpql, User.class);
+    	List<User> mylist = typedQuery.getResultList();
+		
+    	for(User u: mylist) {
+    		if(u.isActive()) {
+    			users+= u.getUsername() + "\n";
+    		}
+    	}
+    	em.close();
+		emf.close();
+    	return users;
+	}
 	
 	// FUnction to delete a publication
 	public String deletePub(String title) {
@@ -257,7 +361,7 @@ public String titlePubInfo(String title) {
     			return 1; // 1 - Username ja existe
     	}
 		
-		User user = new User(username,password);
+		User user = new User(username,password,true);
 		
 		em.persist(user);
 		
@@ -273,7 +377,7 @@ public String titlePubInfo(String title) {
 	private void receive() throws JMSException, FileNotFoundException, NamingException, IOException
 	{
 		// try (JMSContext context = connectionFactory.createContext("calmo", "Calmo@1997");)
-		try (JMSContext context = connectionFactory.createContext("calmo", "Calmo@1997");)
+		try (JMSContext context = connectionFactory.createContext("pedro", "pedro123.");)
 		{
 			
 			JMSConsumer consumer = context.createConsumer(destination);
@@ -289,9 +393,6 @@ public String titlePubInfo(String title) {
 			TextMessage reply = context.createTextMessage();
 			
 			// task comes from the admin and its the same as the one from Researcher
-			if(tokens[0].equals("11"))
-				tokens[0] = "3";
-			
 			switch(tokens[0]) {
 				// 1 - Register. User needs admins approval 				
 				case "1": 
@@ -316,15 +417,21 @@ public String titlePubInfo(String title) {
 					
 				// Login doesnt need admin's approval
 				case "2":
-					if(verifyLogin(tokens[1],tokens[2])== 0)
-		        		reply.setText("SUCCESS Researcher " + tokens[1]+ " has logged in !");
-					else
-		        		reply.setText("ERROR Researcher " + tokens[1]+ " failed to log in !");
+					if(verifyActiveUSer(tokens[1])==0) {
+						if(verifyLogin(tokens[1],tokens[2])== 0)
+			        		reply.setText("SUCCESS Researcher " + tokens[1]+ " has logged in !");
+						else
+			        		reply.setText("ERROR Researcher " + tokens[1]+ " failed to log in !");
+					}
+					else 
+						reply.setText("ERROR Researcher is not active and does not have permission to enter the system");
+					
 					producer.send(msg.getJMSReplyTo(), reply);
 					System.out.println("Sent reply to " + msg.getJMSReplyTo());
 					break;
 					
 				// Researcher or Admin wants to see all Publication Titles	
+				case "11":
 				case "3":
 					temp = getPubTitles();
 	        		reply.setText("Publications Titles: " + temp);
@@ -333,6 +440,7 @@ public String titlePubInfo(String title) {
 					break;
 				
 				// Search a Publication with a title
+				case "12":
 				case "4":
 					temp = titlePubInfo(tokens[1]);
 	        		reply.setText(temp);
@@ -424,6 +532,27 @@ public String titlePubInfo(String title) {
 					System.out.println("Sent reply to " + msg.getJMSReplyTo());
 					break;
 					
+				//List all users ADMIN ONLY
+				case "8":
+					String res=listUsers();
+					reply.setText(res);
+					producer.send(msg.getJMSReplyTo(), reply);
+					System.out.println("Sent reply to " + msg.getJMSReplyTo());
+					break;
+				
+				case "10":
+					String res1=deactivateUser(tokens[1]);
+					reply.setText(res1);
+					producer.send(msg.getJMSReplyTo(), reply);
+					System.out.println("Sent reply to " + msg.getJMSReplyTo());
+					break;
+					
+				case "13":
+					String res11=activateUser(tokens[1]);
+					reply.setText(res11);
+					producer.send(msg.getJMSReplyTo(), reply);
+					System.out.println("Sent reply to " + msg.getJMSReplyTo());
+					break;
 			}
 			
 			
