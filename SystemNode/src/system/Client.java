@@ -32,7 +32,7 @@ public class Client {
 	private String send(String text)
 	{
 		String str = "";
-		try (JMSContext context = connectionFactory.createContext("calmo", "Calmo@1997");)
+		try (JMSContext context = connectionFactory.createContext("pedro", "pedro123.");)
 		{
 			JMSProducer messageProducer = context.createProducer();
 			TextMessage msg = context.createTextMessage();
@@ -56,8 +56,8 @@ public class Client {
 
 	public static void main(String[] args) throws NamingException {
 		// TODO Auto-generated method stub
-		int option;
-		String temp,title,aux;
+		int option,opt;
+		String temp,title,aux,date,type,newtitle;
 		
 		Scanner in = new Scanner(System.in); 
 		Client admin = new Client();
@@ -113,10 +113,13 @@ public class Client {
 		
 		while(option != 0) {
 			title = "";
+			newtitle="";
 			aux = "";
+			date = "";
+			type = "";
 			System.out.println("Choose an action:\n 3-See All Publications \n "
-					+ "4-Search a publication title  \n 5-Add New Publication \n 6-Update Publication \n "
-					+ "7- Remove Publication \n"
+					+ "4-Search a publication title  \n 5-Add New Publication \n 6-Update Publication title \n "
+					+ "20- Update Publication date\n 21- Update Publication type\n7- Remove Publication \n"
 					+ " 0-Exit");
 			option = in.nextInt();
 
@@ -137,7 +140,76 @@ public class Client {
 				aux += title;
 				temp = admin.send(aux);
 				break;
+			
 				
+			//Add a new publication	
+			case 5:
+				aux = "5 ";
+				System.out.println("Insert title of publication: ");
+				while(title.equals("")) {
+					title=in.nextLine();
+				}
+				aux+=title + " ";
+				System.out.println("Insert publication date (dd/mm/yyyy): ");
+				while(date.equals("")) {
+					date=in.nextLine();
+				}
+				aux+=date+" ";
+				System.out.println("Insert publication type: ");
+				while(type.equals("")) {
+					type=in.nextLine();
+				}
+				aux+=type;
+				temp=admin.send(aux);
+				break;
+				
+			//Update a Publication title
+			case 6:
+				aux="6 ";
+				System.out.println("Insert title of publication: ");
+				while(title.equals("")) {
+					title=in.nextLine();
+				}
+				aux+=title + " ";
+				System.out.println("Insert updated title of publication: ");
+				while(newtitle.equals("")) {
+					newtitle=in.nextLine();
+				}
+				aux+=newtitle;
+				temp=admin.send(aux);
+				break;
+				
+			//Update Publication date
+			case 20:
+				aux="20 ";
+				System.out.println("Insert title of publication: ");
+				while(title.equals("")) {
+					title=in.nextLine();
+				}
+				aux+=title + " ";
+				System.out.println("Insert updated date of publication: ");
+				while(newtitle.equals("")) {
+					newtitle=in.nextLine();
+				}
+				aux+=newtitle;
+				temp=admin.send(aux);
+				break;
+				
+			//Update Publication type	
+			case 21:
+				aux="21 ";
+				System.out.println("Insert title of publication: ");
+				while(title.equals("")) {
+					title=in.nextLine();
+				}
+				aux+=title + " ";
+				System.out.println("Insert updated type of publication: ");
+				while(newtitle.equals("")) {
+					newtitle=in.nextLine();
+				}
+				aux+=newtitle;
+				temp=admin.send(aux);
+				break;
 			// Choose a publication to delete
 			case 7:
 				System.out.println("Choose a publication title to delete:");

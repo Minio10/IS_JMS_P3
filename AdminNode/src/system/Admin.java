@@ -28,7 +28,7 @@ public class Admin {
 	private String send(String text)
 	{
 		String str = "";
-		try (JMSContext context = connectionFactory.createContext("calmo", "Calmo@1997");)
+		try (JMSContext context = connectionFactory.createContext("pedro", "pedro123.");)
 		{
 			JMSProducer messageProducer = context.createProducer();
 			TextMessage msg = context.createTextMessage();

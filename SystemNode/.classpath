@@ -60,11 +60,11 @@
 	<classpathentry kind="lib" path="/Projeto2/lib/txw2.jar"/>
 	<classpathentry kind="lib" path="/Projeto2/lib/txw2-2.3.1.jar"/>
 	<classpathentry kind="lib" path="/Projeto2/lib/woodstox-core.jar"/>
-	<classpathentry kind="lib" path="/home/minio/Transferências/wildfly-20.0.1.Final/bin/client/jboss-client.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/pedro/wildfly-20.0.1.Final/bin/client/jboss-client.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
