@@ -54,13 +54,15 @@ public class Admin {
 	public static void main(String[] args) throws NamingException{
 		// TODO Auto-generated method stub
 		int option = 9999;
-		String temp,username,aux;
+		String temp,username,aux,response;
+		String [] requests;
 		Scanner in = new Scanner(System.in); 
 		Admin admin = new Admin();
 		
 		while(option != 0) {
 			username="";
 			aux="";
+			response="";
 			System.out.println("Choose an action:\n8-List all Users"
 					+ "\n9-List all Pending Tasks  \n10-Deactivate User \n11-List All Publications"
 					+ "\n12- Publication Information \n13-Activate User"
@@ -70,11 +72,31 @@ public class Admin {
 			switch(option) {
 				
 				case 8:
-				case 9:
 				case 11:
 					temp = admin.send(Integer.toString(option));
 					break;
 				
+				
+				case 9:
+					temp=admin.send(Integer.toString(option));
+					requests=temp.split("\n");
+					System.out.println("Answer each task with y/n seperated by spaces");
+					while(response.equals("")) {
+						response+= in.nextLine();
+					}
+					
+//					while(response.split(" ").length<requests.length) {
+//						response+= in.nextLine();
+//					}
+//					for(int i=0; i<requests.length;i++) {
+//						while(response.equals("")) {
+//							response+=in.nextLine()+" ";
+//							System.out.println(response);
+//						}
+//					}
+					temp=admin.send(response);
+					break;
+					
 					
 				case 10:
 					aux="10 ";

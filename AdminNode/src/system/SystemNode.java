@@ -1,6 +1,7 @@
 package system;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
@@ -373,13 +374,13 @@ public String titlePubInfo(String title) {
 	}
 	
 	
-	
+	public static ArrayList<TextMessage> msgs=new ArrayList<TextMessage>();
 	private void receive() throws JMSException, FileNotFoundException, NamingException, IOException
 	{
+		
 		// try (JMSContext context = connectionFactory.createContext("calmo", "Calmo@1997");)
 		try (JMSContext context = connectionFactory.createContext("pedro", "pedro123.");)
 		{
-			
 			JMSConsumer consumer = context.createConsumer(destination);
 			TextMessage msg = (TextMessage) consumer.receive();
 			Scanner in = new Scanner(System.in); 
@@ -388,7 +389,7 @@ public String titlePubInfo(String title) {
 			System.out.println("Researcher: "+ msg.getText());
 			
 			String [] tokens = msg.getText().split(" ");
-			
+			String [] request;
 			JMSProducer producer = context.createProducer();
 			TextMessage reply = context.createTextMessage();
 			
@@ -396,23 +397,23 @@ public String titlePubInfo(String title) {
 			switch(tokens[0]) {
 				// 1 - Register. User needs admins approval 				
 				case "1": 
-					System.out.println("Do you want to register this Researcher: y/n ?");
-			        String option = in.nextLine();
-			        
-			        if(option.equals("y")) {
-			        	int res = addResearcher(tokens[1],tokens[2]);
-			        	if(res == 0)
-			        		reply.setText("SUCCESS Researcher " + tokens[1]+ " has been registered with success!");
-			        	else
-			        		reply.setText("The username already exists! Please try again");
-
-			        }
-			        		        
-			        else
-						reply.setText("ERROR Researcher " + tokens[1]+ " wasnt registered!");
-
-					producer.send(msg.getJMSReplyTo(), reply);
-					System.out.println("Sent reply to " + msg.getJMSReplyTo());
+//					System.out.println("Do you want to register this Researcher: y/n ?");
+//			        String option = in.nextLine();
+//			        
+//			        if(option.equals("y")) {
+//			        	int res = addResearcher(tokens[1],tokens[2]);
+//			        	if(res == 0)
+//			        		reply.setText("SUCCESS Researcher " + tokens[1]+ " has been registered with success!");
+//			        	else
+//			        		reply.setText("The username already exists! Please try again");
+//
+//			        }
+//			        		        
+//			        else
+//						reply.setText("ERROR Researcher " + tokens[1]+ " wasnt registered!");
+			        msgs.add(msg);
+//					producer.send(msg.getJMSReplyTo(), reply);
+//					System.out.println("Sent reply to " + msg.getJMSReplyTo());
 					break;
 					
 				// Login doesnt need admin's approval
@@ -450,86 +451,87 @@ public String titlePubInfo(String title) {
 					
 				// Add a publication	
 				case "5":
-					System.out.println("Do you want add this publication: " + tokens[1]+ " y/n ?");
-			         opt = in.nextLine();
-			        
-			        if(opt.equals("y")) {
-			        	String res = addPub(tokens[1],tokens[2],tokens[3]);
-			        	reply.setText(res);
-			        }
-			        		        
-			        else
-						reply.setText("ERROR Admin did not authorize");
-
-					producer.send(msg.getJMSReplyTo(), reply);
-					System.out.println("Sent reply to " + msg.getJMSReplyTo());
+//					System.out.println("Do you want add this publication: " + tokens[1]+ " y/n ?");
+//			         opt = in.nextLine();
+//			        
+//			        if(opt.equals("y")) {
+//			        	String res = addPub(tokens[1],tokens[2],tokens[3]);
+//			        	reply.setText(res);
+//			        }
+//			        		        
+//			        else
+//						reply.setText("ERROR Admin did not authorize");
+			        msgs.add(msg);
+//					producer.send(msg.getJMSReplyTo(), reply);
+//					System.out.println("Sent reply to " + msg.getJMSReplyTo());
 					break;
 				
 				//Update publication title	
 				case "6":
-					System.out.println("Do you want to update this publication: "+ tokens[1]+" y/n?");
-					opt = in.nextLine();
-			        
-			        if(opt.equals("y")) {
-			        	String res = updateTitle(tokens[1],tokens[2]);
-			        	reply.setText(res);
-			        }
-			        		        
-			        else
-						reply.setText("ERROR Admin did not authorize");
-
-					producer.send(msg.getJMSReplyTo(), reply);
-					System.out.println("Sent reply to " + msg.getJMSReplyTo());
+//					System.out.println("Do you want to update this publication: "+ tokens[1]+" y/n?");
+//					opt = in.nextLine();
+//			        
+//			        if(opt.equals("y")) {
+//			        	String res = updateTitle(tokens[1],tokens[2]);
+//			        	reply.setText(res);
+//			        }
+//			        		        
+//			        else
+//						reply.setText("ERROR Admin did not authorize");
+			        msgs.add(msg);
+//					producer.send(msg.getJMSReplyTo(), reply);
+//					System.out.println("Sent reply to " + msg.getJMSReplyTo());
 					break;
 					
 				//Update publication date
 				case "20":
-					System.out.println("Do you want to update this publication: "+ tokens[1]+" y/n?");
-					opt = in.nextLine();
-			        
-			        if(opt.equals("y")) {
-			        	String res = updateDate(tokens[1],tokens[2]);
-			        	reply.setText(res);
-			        }
-			        		        
-			        else
-						reply.setText("ERROR Admin did not authorize");
-
-					producer.send(msg.getJMSReplyTo(), reply);
-					System.out.println("Sent reply to " + msg.getJMSReplyTo());
+//					System.out.println("Do you want to update this publication: "+ tokens[1]+" y/n?");
+//					opt = in.nextLine();
+//			        
+//			        if(opt.equals("y")) {
+//			        	String res = updateDate(tokens[1],tokens[2]);
+//			        	reply.setText(res);
+//			        }
+//			        		        
+//			        else
+//						reply.setText("ERROR Admin did not authorize");
+			        msgs.add(msg);
+//					producer.send(msg.getJMSReplyTo(), reply);
+//					System.out.println("Sent reply to " + msg.getJMSReplyTo());
 					break;
 					
 				//Update publication type
 				case "21":
-					System.out.println("Do you want to update this publication: "+ tokens[1]+" y/n?");
-					opt = in.nextLine();
-			        
-			        if(opt.equals("y")) {
-			        	String res = updateType(tokens[1],tokens[2]);
-			        	reply.setText(res);
-			        }
-			        		        
-			        else
-						reply.setText("ERROR Admin did not authorize");
+//					System.out.println("Do you want to update this publication: "+ tokens[1]+" y/n?");
+//					opt = in.nextLine();
+//			        
+//			        if(opt.equals("y")) {
+//			        	String res = updateType(tokens[1],tokens[2]);
+//			        	reply.setText(res);
+//			        }
+//			        		        
+//			        else
+//						reply.setText("ERROR Admin did not authorize");
 
-					producer.send(msg.getJMSReplyTo(), reply);
-					System.out.println("Sent reply to " + msg.getJMSReplyTo());
+			        msgs.add(msg);
+//					producer.send(msg.getJMSReplyTo(), reply);
+//					System.out.println("Sent reply to " + msg.getJMSReplyTo());
 					break;
 				// Delete a Publication
 				case "7":
-					System.out.println("Do you want delete this publication: " + tokens[1]+ " y/n ?");
-			         opt = in.nextLine();
-			        
-			        if(opt.equals("y")) {
-			        	String res = deletePub(tokens[1]);
-			        	reply.setText(res);
-			        }
-			        		        
-			        else
-						reply.setText("ERROR Admin did not authorize");
-
-					producer.send(msg.getJMSReplyTo(), reply);
-					System.out.println("Sent reply to " + msg.getJMSReplyTo());
+//					System.out.println("Do you want delete this publication: " + tokens[1]+ " y/n ?");
+//			         opt = in.nextLine();
+//			        
+//			        if(opt.equals("y")) {
+//			        	String res = deletePub(tokens[1]);
+//			        	reply.setText(res);
+//			        }
+//			        		        
+//			        else
+//						reply.setText("ERROR Admin did not authorize");
+			        msgs.add(msg);
+//					producer.send(msg.getJMSReplyTo(), reply);
+//					System.out.println("Sent reply to " + msg.getJMSReplyTo());
 					break;
 					
 				//List all users ADMIN ONLY
@@ -553,6 +555,73 @@ public String titlePubInfo(String title) {
 					producer.send(msg.getJMSReplyTo(), reply);
 					System.out.println("Sent reply to " + msg.getJMSReplyTo());
 					break;
+					
+				case "9":
+					String tasks="";
+					for(TextMessage i: msgs) {
+						tasks+= i.getText() + "\n";
+					}
+					reply.setText(tasks);
+					producer.send(msg.getJMSReplyTo(),reply);
+					System.out.println("Sent reply to "+msg.getJMSReplyTo());
+					break;
+					
+				case "y":
+				case "n":
+					for(int i=0;i<tokens.length;i++) {
+						request=msgs.get(i).getText().split(" ");
+						
+						if(request[0].equals("1") && tokens[i].equals("y")) {
+							int res2 = addResearcher(request[1],request[2]);
+				        	if(res2 == 0)
+				        		reply.setText("SUCCESS Researcher " + request[1]+ " has been registered with success!");
+				        	else
+				        		reply.setText("The username already exists! Please try again");
+						}
+						 else if(request[0].equals("1") && tokens[i].equals("y"))
+								reply.setText("ERROR Researcher " + request[1]+ " wasnt registered!");
+						
+						if(request[0].equals("5") && tokens[i].equals("y")) {
+							String res3 = addPub(request[1],request[2],request[3]);
+				        	reply.setText(res3);				   
+				        }				        		        
+				        else if(request[0].equals("5") && tokens[i].equals("n"))
+							reply.setText("ERROR Admin did not authorize");
+						
+						if(request[0].equals("6") && tokens[i].equals("y")) {
+							String res4 = updateTitle(request[1],request[2]);
+				        	reply.setText(res4);
+				        	
+						}else if(request[0].equals("6") && tokens[i].equals("n"))
+							reply.setText("ERROR Admin did not authorize");
+						
+						if(request[0].equals("7") && tokens[i].equals("y")) {
+							String res5 = deletePub(request[1]);
+				        	reply.setText(res5);
+				        }
+				        		        
+				        else if(request[0].equals("7") && tokens[i].equals("n"))
+							reply.setText("ERROR Admin did not authorize");	
+						
+						if(request[0].equals("20") && tokens[i].equals("y")) {
+							String res6 = updateDate(request[1],request[2]);
+				        	reply.setText(res6);
+						}
+						else if(request[0].equals("20") && tokens[i].equals("n"))
+							reply.setText("ERROR Admin did not authorize");
+						
+						if(request[0].equals("21")&& tokens[i].equals("y")) {
+							String res7 = updateType(request[1],request[2]);
+				        	reply.setText(res7);
+						}
+						else if(request[0].equals("21") && tokens[i].equals("n"))
+							reply.setText("ERROR Admin did not authorize");
+						
+						producer.send(msgs.get(i).getJMSReplyTo(), reply);
+						producer.send(msg.getJMSReplyTo(), "Task done");
+						System.out.println("Sent reply to " + msgs.get(i).getJMSReplyTo());
+					}
+					msgs.clear();
 			}
 			
 			
