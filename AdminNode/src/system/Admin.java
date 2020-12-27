@@ -29,7 +29,7 @@ public class Admin {
 	{
 		String str = "";
 		// try (JMSContext context = connectionFactory.createContext("calmo", "Calmo@1997");)
-		try (JMSContext context = connectionFactory.createContext("pedro", "pedro123.");)
+		try (JMSContext context = connectionFactory.createContext("calmo", "Calmo@1997");)
 		{
 			JMSProducer messageProducer = context.createProducer();
 			TextMessage msg = context.createTextMessage();
@@ -84,16 +84,6 @@ public class Admin {
 					while(response.equals("")) {
 						response+= in.nextLine();
 					}
-					
-//					while(response.split(" ").length<requests.length) {
-//						response+= in.nextLine();
-//					}
-//					for(int i=0; i<requests.length;i++) {
-//						while(response.equals("")) {
-//							response+=in.nextLine()+" ";
-//							System.out.println(response);
-//						}
-//					}
 					temp=admin.send(response);
 					break;
 					

@@ -33,7 +33,7 @@ public class Client {
 	{
 		String str = "";
 		// try (JMSContext context = connectionFactory.createContext("calmo", "Calmo@1997");)
-		try (JMSContext context = connectionFactory.createContext("pedro", "pedro123.");)
+		try (JMSContext context = connectionFactory.createContext("calmo", "Calmo@1997");)
 		{
 			JMSProducer messageProducer = context.createProducer();
 			TextMessage msg = context.createTextMessage();
@@ -65,10 +65,13 @@ public class Client {
 		Scanner in = new Scanner(System.in); 
 		Client admin = new Client();
 		
+		// Thread receiving notifications from admin
+		Thread notif = new Thread(new ClientThread());
+		notif.start();
 		
-
 		// Register
 		while(true) {
+			
 			String username = "";
 			String password = "";
 			System.out.println("1 - Register\n2 - Login");
@@ -115,6 +118,7 @@ public class Client {
 		
 		
 		while(option != 0) {
+			
 			title = "";
 			newtitle="";
 			aux = "";
